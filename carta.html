@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Nuestra Carta de Amor</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100vh;
+      font-family: 'Arial', sans-serif;
+      background-color: #fff5f5;
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      padding-top: 80px;
+      padding-bottom: 80px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      padding: 8px 14px;
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.85em;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+
+    .back-btn:hover {
+      background: #d6003b;
+      transform: translateY(-2px);
+    }
+
+    .letter {
+      background: white;
+      padding: 20px 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      position: relative;
+      margin-bottom: 30px;
+      font-size: 0.95em;
+    }
+
+    .letter:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: linear-gradient(90deg, #ff6b6b, #ffb8b8);
+      border-radius: 12px 12px 0 0;
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: #ff6b6b;
+      transition: all 0.3s;
+    }
+
+    .audio-player {
+      width: 100%;
+      margin-top: 30px;
+      text-align: center;
+      padding-bottom: 30px;
+    }
+
+    audio {
+      width: 100%;
+      max-width: 500px;
+    }
+
+    #floating-elements {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .floating-element {
+      position: absolute;
+      font-size: 24px;
+      animation: floatElement 20s linear infinite;
+    }
+
+    @keyframes floatElement {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.7; }
+      100% { transform: translateY(-70vh) rotate(360deg); opacity: 0; }
+    }
+
+    .petal {
+      position: absolute;
+      top: -10vh;
+      color: #fba0a0;
+      font-size: 20px;
+      animation: fallPetal linear infinite;
+      z-index: 0;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    @keyframes fallPetal {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.8; }
+      100% { transform: translateY(70vh) rotate(360deg); opacity: 0; }
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        padding: 20px;
+        padding-top: 100px;
+        padding-bottom: 100px;
+      }
+      
+      .back-btn {
+        padding: 10px 16px;
+        font-size: 0.95em;
+      }
+      
+      .letter {
+        padding: 30px 20px;
+        font-size: 1em;
+      }
+      
+      .letter:before {
+        height: 10px;
+        border-radius: 15px 15px 0 0;
+      }
+      
+      .audio-player {
+        margin-top: 40px;
+        padding-bottom: 40px;
+      }
+      
+      .floating-element {
+        font-size: 30px;
+      }
+      
+      .petal {
+        font-size: 26px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+</head>
+<body>
+  <button class="back-btn" onclick="history.back()">
+    <i class="fas fa-arrow-left"></i> Volver
+  </button>
+
+  <div id="floating-elements"></div>
+
+  <div class="container">
+    <div class="letter" id="letter">
+      <p>Hoy no es solo tu cumpleaños.<br>
+        Hoy es también nuestro día.<br>
+        Un año y seis meses desde que decidimos caminar juntos, aunque fuera a distancia. Desde que nuestras vidas se cruzaron de verdad. Y desde entonces, todo cambió.</p>
+
+      <p>No sé si siempre encuentro las palabras adecuadas para expresar lo que siento por ti, pero lo intento cada día. Lo que siento es profundo, sincero, y constante. Una presencia que no se apaga con la distancia ni con el paso del tiempo. Que crece y se fortalece con cada llamada, con cada conversación, con cada momento que compartimos, aunque sea en la distancia.</p>
+
+      <p>A veces me resulta difícil poner en palabras lo que representas para mí. Pero hay algo claro: contigo he encontrado un hogar. No un lugar, sino un refugio, un lugar seguro donde puedo ser yo misma y sentirme completa.</p>
+
+      <p>Admiro tu fortaleza, tu valentía, esa manera en que enfrentas la vida y sigues adelante con determinación, incluso cuando el camino es difícil. A pesar de la distancia, has sabido construir algo bonito y real, algo que va más allá de lo físico.</p>
+
+      <p>Gracias por este año y medio compartido. Gracias por tu presencia constante, por no rendirte, por hacerme sentir acompañada y valorada. Gracias por elegirnos, por elegir este amor día a día, con sinceridad y con ganas.</p>
+
+      <p>Feliz cumpleaños, mi vida.<br>
+        Feliz nosotros.</p>
+
+      <p>Y para terminar, quiero que sepas que, más allá de las palabras, más allá de los momentos, más allá de la distancia… te amo.</p>
+
+      <p>Siempre contigo.</p>
+    </div>
+
+    <div class="audio-player">
+      <h3>Escucha mi mensaje para ti 🫶🏼</h3>
+      <audio controls id="audio">
+        <source src="assets/audio.mp3" type="audio/mpeg">
+        Tu navegador no soporta audio.
+      </audio>
+    </div>
+  </div>
+
+  <script>
+    function crearElementosFlotantes() {
+      const container = document.getElementById('floating-elements');
+      const petalos = ['🌹','🦋'];
+      for (let i = 0; i < 15; i++) {
+        const elemento = document.createElement('div');
+        elemento.className = 'floating-element';
+        elemento.innerHTML = petalos[Math.floor(Math.random() * petalos.length)];
+        elemento.style.left = Math.random() * 100 + 'vw';
+        elemento.style.top = Math.random() * 100 + 'vh';
+        elemento.style.fontSize = (Math.random() * 20 + 20) + 'px';
+        elemento.style.animationDuration = (Math.random() * 20 + 15) + 's';
+        elemento.style.animationDelay = Math.random() * 5 + 's';
+        container.appendChild(elemento);
+      }
+    }
+
+    function createPetal() {
+      const petalos = ['🌹','🦋'];
+      const petal = document.createElement('div');
+      petal.className = 'petal';
+      petal.innerHTML = petalos[Math.floor(Math.random() * petalos.length)];
+      petal.style.left = Math.random() * 100 + 'vw';
+      petal.style.fontSize = (Math.random() * 15 + 15) + 'px';
+      petal.style.animationDuration = (Math.random() * 15 + 10) + 's';
+      document.body.appendChild(petal);
+      setTimeout(() => petal.remove(), 20000);
+    }
+
+    window.onload = () => {
+      crearElementosFlotantes();
+      setInterval(createPetal, 800);
+    };
+  </script>
+</body>
+</html>

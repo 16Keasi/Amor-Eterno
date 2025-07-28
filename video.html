@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Nuestra Canción</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      overflow-x: hidden;
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #fff0f5, #fff8f8);
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; /* Centrado vertical principal */
+      color: #333;
+      position: relative;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+      box-sizing: border-box;
+    }
+    
+    .back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      padding: 10px 16px;
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.9em;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+    
+    .back-btn:hover {
+      background: #d6003b;
+      transform: translateY(-2px);
+    }
+    
+    .container {
+      text-align: center;
+      width: 90%;
+      max-width: 600px;
+      padding: 40px 25px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,107,107,0.2);
+      z-index: 5;
+      margin: 60px 0 30px; /* Ajuste de márgenes superior e inferior */
+      -webkit-overflow-scrolling: touch;
+      transform: translateY(0); /* Posición natural */
+    }
+    
+    h1 {
+      color: #ff6b6b;
+      margin-bottom: 20px;
+      font-size: 1.8em;
+      position: relative;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+    
+    h1:after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ff6b6b, transparent);
+    }
+    
+    .player-container {
+      margin: 20px 0;
+      padding: 15px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 10px;
+      border: 1px solid rgba(255,107,107,0.1);
+    }
+    
+    audio {
+      width: 100%;
+      outline: none;
+    }
+    
+    audio::-webkit-media-controls-panel {
+      background: #fff5f5;
+    }
+    
+    .youtube-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 20px;
+      padding: 12px 25px;
+      background: #ff0000;
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(255,0,0,0.2);
+      border: 2px solid rgba(255,255,255,0.3);
+      font-size: 0.95em;
+    }
+    
+    .youtube-link:hover {
+      background: #e60000;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(255,0,0,0.3);
+    }
+    
+    .youtube-link i {
+      margin-right: 10px;
+      font-size: 1.2em;
+    }
+    
+    .cover-art {
+      width: 180px;
+      height: 180px;
+      border-radius: 12px;
+      object-fit: cover;
+      margin: 0 auto 20px;
+      box-shadow: 0 10px 25px rgba(214,0,59,0.2);
+      border: 6px solid white;
+      animation: float 6s ease-in-out infinite;
+      transition: all 0.3s ease;
+    }
+    
+    .cover-art:hover {
+      transform: scale(1.03);
+      box-shadow: 0 15px 30px rgba(214,0,59,0.3);
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* Animaciones que no afectan el scroll */
+    .animation-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .butterfly {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,20 C60,10 80,15 80,30 C80,45 60,50 50,60 C40,50 20,45 20,30 C20,15 40,10 50,20 Z" fill="%23ff6b6b"/><path d="M50,20 C60,30 70,25 80,30 C70,35 60,40 50,60 C40,40 30,35 20,30 C30,25 40,30 50,20 Z" fill="%23ff8e8e"/></svg>');
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: fly 15s linear infinite;
+      opacity: 0.8;
+    }
+
+    .flower {
+      position: absolute;
+      font-size: 20px;
+      animation: floatFlower 20s linear infinite;
+      opacity: 0.3; /* Aquí el cambio para flores más claras */
+    }
+
+    .petal {
+      position: absolute;
+      color: #fba0a0;
+      font-size: 14px;
+      animation: fallPetal 12s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fly {
+      0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.8; }
+      100% { transform: translate(100vw, 100vh) rotate(360deg); opacity: 0; }
+    }
+
+    @keyframes floatFlower {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.7; }
+      100% { transform: translateY(-20vh) rotate(180deg); opacity: 0; }
+    }
+
+    @keyframes fallPetal {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.8; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        padding: 50px 40px;
+        margin: 40px 0;
+      }
+      
+      h1 {
+        font-size: 2.3em;
+        margin-bottom: 25px;
+      }
+      
+      h1:after {
+        width: 100px;
+        height: 3px;
+      }
+      
+      .cover-art {
+        width: 200px;
+        height: 200px;
+      }
+      
+      .youtube-link {
+        padding: 14px 30px;
+        font-size: 1em;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <button class="back-btn" onclick="history.back()">
+    <i class="fas fa-arrow-left"></i> Volver
+  </button>
+
+  <div class="animation-container" id="animationContainer"></div>
+
+  <div class="container">
+    <img src="assets/imagen.jpg" alt="Portada canción" class="cover-art" onerror="this.onerror=null;this.src='https://via.placeholder.com/220x220/ff6b6b/ffffff?text=HIGHBOURGINGMALITY'">
+    <h1>Qué Bonito Contigo</h1>
+
+    <div class="player-container">
+      <audio controls>
+        <source src="assets/cancion.mp3" type="audio/mpeg">
+        Tu navegador no soporta audio.
+      </audio>
+    </div>
+
+    <a href="https://youtu.be/1eJlVbu5KKQ?si=U_NzPHX3WzjtMrrc" class="youtube-link" target="_blank">
+      <i class="fab fa-youtube"></i> Ver en YouTube
+    </a>
+  </div>
+
+  <script>
+    function createButterfly() {
+      const container = document.getElementById('animationContainer');
+      const butterfly = document.createElement('div');
+      butterfly.className = 'butterfly';
+      butterfly.style.left = -30 + 'px';
+      butterfly.style.top = Math.random() * 30 + 'vh'; // Limitamos la posición vertical inicial
+      butterfly.style.animationDuration = Math.random() * 10 + 10 + 's';
+      butterfly.style.transform = `scale(${Math.random() * 0.5 + 0.5}) rotate(${Math.random() * 360}deg)`;
+      container.appendChild(butterfly);
+      setTimeout(() => butterfly.remove(), 20000);
+    }
+
+    function createFlower() {
+      const container = document.getElementById('animationContainer');
+      const flower = document.createElement('div');
+      flower.className = 'flower';
+      flower.innerHTML = '🌸';
+      flower.style.left = Math.random() * 100 + 'vw';
+      flower.style.top = (70 + Math.random() * 20) + 'vh'; // Flores aparecen más abajo
+      flower.style.animationDuration = Math.random() * 15 + 15 + 's';
+      flower.style.fontSize = Math.random() * 20 + 20 + 'px';
+      container.appendChild(flower);
+      setTimeout(() => flower.remove(), 30000);
+    }
+
+    function createPetal() {
+      const container = document.getElementById('animationContainer');
+      const petal = document.createElement('div');
+      petal.className = 'petal';
+      petal.innerHTML = '🌸';
+      petal.style.left = Math.random() * 100 + 'vw';
+      petal.style.top = (80 + Math.random() * 10) + 'vh'; // Pétalos aparecen más abajo
+      petal.style.fontSize = (Math.random() * 10 + 10) + 'px';
+      petal.style.animationDuration = (Math.random() * 10 + 8) + 's';
+      container.appendChild(petal);
+      setTimeout(() => petal.remove(), 20000);
+    }
+
+    // Reducimos la cantidad de elementos animados
+    setInterval(createButterfly, 2500);
+    setInterval(createFlower, 3500);
+    setInterval(createPetal, 2000);
+
+    // Iniciamos con menos elementos
+    setTimeout(createButterfly, 500);
+    setTimeout(createFlower, 800);
+    setTimeout(createPetal, 1100);
+  </script>
+</body>
+</html>
